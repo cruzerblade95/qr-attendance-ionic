@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams } from '@ionic/angular';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { Toast } from '@ionic-native/toast/ngx';
 
 import { User } from '../../modal/User';
 
@@ -17,6 +18,7 @@ export class RegisterPage implements OnInit {
     public navCtrl: NavController,
     public navParams: NavParams,
     public angularFireAuth: AngularFireAuth,
+    public toast: Toast,
   ) { }
 
   ngOnInit() {
@@ -24,14 +26,17 @@ export class RegisterPage implements OnInit {
 
   async register() {
     try {
-
       var r = await this.angularFireAuth.createUserWithEmailAndPassword(
         this.user.email,
         this.user.password,
       );
 
       if (r) {
-        console.log('Successfully Registered');
+        this.toast.show(`Successfully Registered`, '5000', 'center').subscribe(
+          toast => {
+            console.log('Successfully Registered');
+          }
+        );
         this.navCtrl.navigateForward('home');
       }
 

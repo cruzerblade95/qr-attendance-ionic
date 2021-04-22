@@ -1,5 +1,8 @@
 {
   "name": "qr-student-attendance-system",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {},
+    "cordova": {}
+  },
   "type": "angular"
 }
